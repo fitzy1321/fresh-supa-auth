@@ -3,13 +3,13 @@ import Layout from "../components/Layout.tsx";
 import { State } from "./_middleware.ts";
 
 export const handler: Handlers<any, State> = {
-  GET(_req, ctx) {
+  async GET(_req, ctx) {
+    console.log(await ctx.state.supabaseClient.auth.getSession());
     return ctx.render({ ...ctx.state });
   },
 };
 
 export default function Home(props: PageProps) {
-  console.log({ data: props.data });
   return (
     <Layout isLoggedIn={props.data.token}>
       <div class="mt-10 px-5 mx-auto flex max-w-screen-md flex-col justify-center">

@@ -14,7 +14,7 @@ export const handler: Handlers<any, State> = {
 
     const headers = new Headers();
 
-    let redirect = "/";
+    let redirect = "/email_confirm";
     if (error) {
       redirect = `/signup?error=${error.message}`;
     }

@@ -13,11 +13,24 @@ export const handler: Handlers<any, State> = {
 
     const headers = new Headers();
 
+    if (error) {
+      console.log(error);
+      if (error.message === "Email not confirmed") {
+        headers.set("location", "/email_confirm");
+        return new Response(null, { status: 303, headers });
+      }
+    }
+
     if (data.session) {
+      console.log(data.sessiona);
       setCookie(headers, {
         name: "supaLogin",
         "value": data.session?.access_token,
         maxAge: data.session.expires_in,
+      });
+      await ctx.state.supabaseClient.auth.setSession({
+        access_token: data.session.access_token,
+        refresh_token: data.session.refresh_token,
       });
     }
 
