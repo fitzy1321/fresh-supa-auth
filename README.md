@@ -1,13 +1,24 @@
 # Fresh project
 
-Your new Fresh project is ready to go. You can follow the Fresh "Getting
-Started" guide here: https://fresh.deno.dev/docs/getting-started
+Current Versions (cuz this $h!T moves fast):
 
-### Usage
+- Fresh : 1.5.4
+- Supabase-js: 2.38.4
 
-Make sure to install Deno: https://deno.land/manual/getting_started/installation
+## Run App
 
-Then start the project:
+Copy `.env.example`:
+
+```sh
+cp .env.example .env
+```
+
+Make a supabase project: https://supabase.com
+
+
+
+
+start the project:
 
 ```
 deno task start

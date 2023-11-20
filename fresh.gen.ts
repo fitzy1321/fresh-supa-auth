@@ -4,18 +4,28 @@
 
 import * as $0 from "./routes/_404.tsx";
 import * as $1 from "./routes/_app.tsx";
-import * as $2 from "./routes/api/joke.ts";
-import * as $3 from "./routes/greet/[name].tsx";
-import * as $4 from "./routes/index.tsx";
+import * as $2 from "./routes/_middleware.ts";
+import * as $3 from "./routes/api/joke.ts";
+import * as $4 from "./routes/auth/_middleware.ts";
+import * as $5 from "./routes/auth/secret.tsx";
+import * as $6 from "./routes/greet/[name].tsx";
+import * as $7 from "./routes/index.tsx";
+import * as $8 from "./routes/login.tsx";
+import * as $9 from "./routes/signup.tsx";
 import * as $$0 from "./islands/Counter.tsx";
 
 const manifest = {
   routes: {
     "./routes/_404.tsx": $0,
     "./routes/_app.tsx": $1,
-    "./routes/api/joke.ts": $2,
-    "./routes/greet/[name].tsx": $3,
-    "./routes/index.tsx": $4,
+    "./routes/_middleware.ts": $2,
+    "./routes/api/joke.ts": $3,
+    "./routes/auth/_middleware.ts": $4,
+    "./routes/auth/secret.tsx": $5,
+    "./routes/greet/[name].tsx": $6,
+    "./routes/index.tsx": $7,
+    "./routes/login.tsx": $8,
+    "./routes/signup.tsx": $9,
   },
   islands: {
     "./islands/Counter.tsx": $$0,
