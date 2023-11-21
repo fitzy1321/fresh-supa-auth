@@ -1,6 +1,6 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
-import { setCookie } from "$std/http/cookie.ts";
 import { State } from "./_middleware.ts";
+import { setSession } from "../utils/kvdb.ts";
 
 export const handler: Handlers<unknown, State> = {
   async POST(req, ctx) {
@@ -11,25 +11,32 @@ export const handler: Handlers<unknown, State> = {
     const { data, error } = await ctx.state.supabaseClient.auth
       .signInWithPassword({ email, password });
 
-    const headers = new Headers();
+    let headers = new Headers();
     let redirect = "/";
 
     if (error) {
-      console.log(error);
       if (error.message === "Email not confirmed") {
-        headers.set("location", "/email_confirm");
-        return new Response(null, { status: 303, headers });
+        redirect = "/email_confirm";
       } else {
+        console.log(error);
         redirect = `/login?error=${error.message}`;
       }
+
+      headers.set("location", redirect);
+      return new Response(null, {
+        status: 303,
+        headers,
+      });
     }
 
     if (data.session) {
-      setCookie(headers, {
-        name: "supaLogin",
-        "value": data.session?.access_token,
-        maxAge: data.session.expires_in,
-      });
+      const tokens = {
+        access_token: data.session.access_token,
+        refresh_token: data.session.refresh_token,
+      };
+      const expires = data.session.expires_in - 5;
+      const userId = crypto.randomUUID();
+      headers = await setSession(req, userId, tokens, expires);
 
       //   await ctx.state.supabaseClient.auth.setSession({
       //     access_token: data.session.access_token,

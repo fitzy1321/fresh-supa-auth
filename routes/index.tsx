@@ -4,6 +4,11 @@ import { State } from "./_middleware.ts";
 
 export const handler: Handlers<unknown, State> = {
   GET(_req, ctx) {
+    // TODO: can I simplify this for all "protected" routes?
+    if (!ctx.state.token && ctx.state.headers) {
+      ctx.state.headers.set("location", "/login");
+      return new Response(null, { status: 300, headers: ctx.state.headers });
+    }
     return ctx.render({ ...ctx.state });
   },
 };

@@ -3,7 +3,8 @@ import type { ComponentChildren } from "preact";
 import Nav from "./Nav.tsx";
 
 interface LayoutProps {
-  isLoggedIn: boolean;
+  isLoggedIn?: boolean;
+  compactNav?: boolean;
   children: ComponentChildren;
 }
 
@@ -13,7 +14,7 @@ export default function Layout(props: LayoutProps) {
       <Head>
         <title>Fresh Auth</title>
       </Head>
-      <Nav loggedIn={props.isLoggedIn} />
+      <Nav loggedIn={props.isLoggedIn} compact={props.compactNav} />
       <div class="p-4 mx-auto max-w-screen-md">
         {props.children}
       </div>
