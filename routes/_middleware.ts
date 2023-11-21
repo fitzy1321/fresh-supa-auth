@@ -1,10 +1,10 @@
 import { MiddlewareHandlerContext } from "$fresh/server.ts";
-import { createClient, SupabaseClient } from "@supabase/supabase-js";
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { getCookies } from "$std/http/cookie.ts";
 
 export interface State {
   token: string | null;
-  supabaseClient: SupabaseClient<any, "public", any>;
+  supabaseClient: SupabaseClient;
 }
 
 export async function handler(

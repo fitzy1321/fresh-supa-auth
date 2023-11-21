@@ -2,7 +2,7 @@ import { Handlers, PageProps } from "$fresh/server.ts";
 import Layout from "../components/Layout.tsx";
 import { State } from "./_middleware.ts";
 
-export const handler: Handlers<any, State> = {
+export const handler: Handlers<unknown, State> = {
   GET(_req, ctx) {
     return ctx.render({ ...ctx.state });
   },

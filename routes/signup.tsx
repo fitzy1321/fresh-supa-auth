@@ -1,7 +1,7 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { State } from "./_middleware.ts";
 
-export const handler: Handlers<any, State> = {
+export const handler: Handlers<unknown, State> = {
   async POST(req, ctx) {
     const form = await req.formData();
     const email = form.get("email") as string;

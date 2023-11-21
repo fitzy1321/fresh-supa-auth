@@ -2,7 +2,7 @@ import { Handlers, PageProps } from "$fresh/server.ts";
 import { setCookie } from "$std/http/cookie.ts";
 import { State } from "./_middleware.ts";
 
-export const handler: Handlers<any, State> = {
+export const handler: Handlers<unknown, State> = {
   async POST(req, ctx) {
     const form = await req.formData();
     const email = form.get("email") as string;
@@ -12,31 +12,29 @@ export const handler: Handlers<any, State> = {
       .signInWithPassword({ email, password });
 
     const headers = new Headers();
+    let redirect = "/";
 
     if (error) {
       console.log(error);
       if (error.message === "Email not confirmed") {
         headers.set("location", "/email_confirm");
         return new Response(null, { status: 303, headers });
+      } else {
+        redirect = `/login?error=${error.message}`;
       }
     }
 
     if (data.session) {
-      console.log(data.sessiona);
       setCookie(headers, {
         name: "supaLogin",
         "value": data.session?.access_token,
         maxAge: data.session.expires_in,
       });
-      await ctx.state.supabaseClient.auth.setSession({
-        access_token: data.session.access_token,
-        refresh_token: data.session.refresh_token,
-      });
-    }
 
-    let redirect = "/";
-    if (error) {
-      redirect = `/login?error=${error.message}`;
+      //   await ctx.state.supabaseClient.auth.setSession({
+      //     access_token: data.session.access_token,
+      //     refresh_token: data.session.refresh_token,
+      //   });
     }
 
     headers.set("location", redirect);

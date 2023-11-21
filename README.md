@@ -13,13 +13,13 @@ Copy `.env.example`:
 cp .env.example .env
 ```
 
-Make a supabase project: https://supabase.com  
+Make a supabase project: <https://supabase.com>  
 After creating a new project, goto Settings, then API Settings  
 Copy `project url` into `SUPABASE_URL` in your `.env` file  
 Copy `anon public key` into `SUPABASE_KEY`  
 Start the project
 
-```
+```sh
 deno task start
 ```
 

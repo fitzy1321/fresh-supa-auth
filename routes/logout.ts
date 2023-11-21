@@ -2,7 +2,7 @@ import { deleteCookie, getCookies } from "$std/http/cookie.ts";
 import { Handlers } from "$fresh/server.ts";
 import { State } from "./_middleware.ts";
 
-export const handler: Handlers<any, State> = {
+export const handler: Handlers<unknown, State> = {
   async GET(req, ctx) {
     const supaCreds = getCookies(req.headers)["supaLogin"];
     if (!supaCreds) {
