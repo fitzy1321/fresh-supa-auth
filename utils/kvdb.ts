@@ -29,6 +29,10 @@ export async function getSession(sessionId: string) {
   return await kv.get<Tokens>([SESSION_KEY, sessionId]);
 }
 
+export async function deleteSession(sessionId: string) {
+  await kv.delete([SESSION_KEY, sessionId]);
+}
+
 // export default async function simpleHash(message: string) {
 //   const data = new TextEncoder().encode(message);
 //   const hashBuffer = await crypto.subtle.digest("SHA-256", data);

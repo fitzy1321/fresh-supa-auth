@@ -44,3 +44,11 @@ export function getSessionCookie(
 ) {
   return _cookie.getCookies(req.headers)[cookieName];
 }
+
+export function deleteSessionCookie(
+  headers: Headers,
+  url: string,
+  cookieName = getCookieName(SITE_COOKIE_NAME, isHttps(url)),
+) {
+  return _cookie.deleteCookie(headers, cookieName, { path: COOKIE_BASE.path });
+}
