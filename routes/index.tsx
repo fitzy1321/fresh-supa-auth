@@ -3,8 +3,7 @@ import Layout from "../components/Layout.tsx";
 import { State } from "./_middleware.ts";
 
 export const handler: Handlers<any, State> = {
-  async GET(_req, ctx) {
-    console.log(await ctx.state.supabaseClient.auth.getSession());
+  GET(_req, ctx) {
     return ctx.render({ ...ctx.state });
   },
 };

@@ -13,7 +13,7 @@ export default function Layout(props: LayoutProps) {
       <Head>
         <title>Fresh Auth</title>
       </Head>
-      <Nav active="/" loggedIn={props.isLoggedIn} />
+      <Nav loggedIn={props.isLoggedIn} />
       <div class="p-4 mx-auto max-w-screen-md">
         {props.children}
       </div>
