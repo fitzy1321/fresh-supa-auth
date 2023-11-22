@@ -28,3 +28,7 @@ deno task start
 ```
 
 This will watch the project directory and restart as necessary.
+
+## Inspiration 
+
+<https://github.com/denoland/deno_kv_oauth>
