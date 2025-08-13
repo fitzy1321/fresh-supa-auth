@@ -13,8 +13,6 @@ Copy `.env.example` file:
 cp .env.example .env
 ```
 
-
-
 Make a supabase project: <https://supabase.com>
 
 After creating a new project, goto Settings, then API Settings
