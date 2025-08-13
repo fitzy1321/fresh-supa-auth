@@ -2,36 +2,42 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
-import * as $0 from "./routes/_404.tsx";
-import * as $1 from "./routes/_app.tsx";
-import * as $2 from "./routes/_middleware.ts";
-import * as $3 from "./routes/api/joke.ts";
-import * as $4 from "./routes/auth/_middleware.ts";
-import * as $5 from "./routes/auth/secret.tsx";
-import * as $6 from "./routes/email_confirm.tsx";
-import * as $7 from "./routes/greet/[name].tsx";
-import * as $8 from "./routes/index.tsx";
-import * as $9 from "./routes/login.tsx";
-import * as $10 from "./routes/logout.ts";
-import * as $11 from "./routes/signup.tsx";
+import * as $_404 from "./routes/_404.tsx";
+import * as $_app from "./routes/_app.tsx";
+import * as $_index_new from "./routes/_index.new.tsx";
+import * as $_middleware from "./routes/_middleware.ts";
+import * as $api_joke from "./routes/api/joke.ts";
+import * as $auth_middleware from "./routes/auth/_middleware.ts";
+import * as $auth_secret from "./routes/auth/secret.tsx";
+import * as $email_confirm from "./routes/auth/email_confirm.tsx";
+import * as $greet_name_ from "./routes/greet/[name].tsx";
+import * as $in./routes/auth/login.tsx/index.tsx";
+import * as $login from "./routes/login.tsx";
+import * as $logout from "./routes/auth/logout.ts";
+import * as $signup from "./routes/auth/signup.tsx";
+import * as $Counter from "./islands/Counter.tsx";
+import type { Manifest } from "$fresh/server.ts";
 
 const manifest = {
   routes: {
-    "./routes/_404.tsx": $0,
-    "./routes/_app.tsx": $1,
-    "./routes/_middleware.ts": $2,
-    "./routes/api/joke.ts": $3,
-    "./routes/auth/_middleware.ts": $4,
-    "./routes/auth/secret.tsx": $5,
-    "./routes/email_confirm.tsx": $6,
-    "./routes/greet/[name].tsx": $7,
-    "./routes/index.tsx": $8,
-    "./routes/login.tsx": $9,
-    "./routes/logout.ts": $10,
-    "./routes/signup.tsx": $11,
+    "./routes/_404.tsx": $_404,
+    "./routes/_app.tsx": $_app,
+    "./routes/_index.new.tsx": $_index_new,
+    "./routes/_middleware.ts": $_middleware,
+    "./routes/api/joke.ts": $api_joke,
+    "./routes/auth/_middleware.ts": $auth_middleware,
+    "./routes/auth/secret.tsx": $auth_secret,
+    "./routes/email_confirm.tsx": $email_confirm,
+    "./routes/greet/[name].tsx": $greet_name_,
+    "./routes/index.tsx": $index,
+    "./routes/login.tsx": $login,
+    "./routes/logout.ts": $logout,
+    "./routes/signup.tsx": $signup,
   },
-  islands: {},
+  islands: {
+    "./islands/Counter.tsx": $Counter,
+  },
   baseUrl: import.meta.url,
-};
+} satisfies Manifest;
 
 export default manifest;

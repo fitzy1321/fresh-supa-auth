@@ -1,29 +1,28 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
-import { State } from "./_middleware.ts";
+import { createClient } from "../../utils/supabase/server.ts";
+import { State } from "../../utils/state.ts";
 
 export const handler: Handlers<unknown, State> = {
-  async POST(req, ctx) {
+  async POST(req, _ctx) {
     const form = await req.formData();
     const email = form.get("email") as string;
     const password = form.get("password") as string;
 
-    const { error } = await ctx.state.supabaseClient.auth.signUp({
+    const resp = new Response(null, { status: 303 });
+    const client = createClient(req, resp);
+
+    const { data, error } = await client.auth.signUp({
       email,
       password,
     });
 
-    const headers = new Headers();
-
-    let redirect = "/email_confirm";
+    let redirect = "/auth/email_confirm";
     if (error) {
-      redirect = `/signup?error=${error.message}`;
+      redirect = `/auth/signup?error=${error.message}`;
     }
 
-    headers.set("location", redirect);
-    return new Response(null, {
-      status: 303,
-      headers,
-    });
+    resp.headers.set("location", redirect);
+    return resp;
   },
 };
 

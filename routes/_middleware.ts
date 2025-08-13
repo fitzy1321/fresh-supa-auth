@@ -1,52 +1,40 @@
-import { MiddlewareHandlerContext } from "$fresh/server.ts";
-import { createClient, type SupabaseClient } from "@supabase/supabase-js";
-import { getSession } from "../utils/kvdb.ts";
-import { getSessionCookie } from "../utils/cookie.ts";
-
-export interface State {
-  token: string | null;
-  supabaseClient: SupabaseClient;
-  headers?: Headers;
-}
+import { FreshContext } from "$fresh/server.ts";
+import { State } from "../utils/state.ts";
+import { createClient } from "../utils/supabase/server.ts";
 
 export async function handler(
   req: Request,
-  ctx: MiddlewareHandlerContext<State>,
+  ctx: FreshContext<State>,
 ) {
-  const client = createClient(
-    Deno.env.get("SUPABASE_URL") || "",
-    Deno.env.get("SUPABASE_KEY") || "",
-  );
-  client.auth.onAuthStateChange((event, session) =>
-    console.log({ event, session })
-    // TODO: handle refresh cycle and change refresh token
-  );
+  const resp = new Response();
+  const client = createClient(req, resp);
 
-  ctx.state.supabaseClient = client;
-  // get sessionId from cookie
-  const sessionId = getSessionCookie(req);
-  if (!sessionId) {
-    return await ctx.next();
+  const { data: { session }, error: err1 } = await client.auth.getSession();
+  if (err1) {
+    // TODO: handle error here
   }
-  // get tokens from kv
-  const tokens = await getSession(sessionId);
-  if (!tokens?.value) {
-    ctx.state.token = null;
-    return await ctx.next();
+  ctx.state.session = session;
+
+  // `getUser()` will validate the JWT
+  const { data: { user }, error: err2 } = await client.auth.getUser();
+  if (err2) {
+    // JWT validation has failed
+    ctx.state.session = null;
+    ctx.state.user = null;
   }
 
-  //** supabase client can't store session server-side */
-  const { data, error } = await ctx.state.supabaseClient.auth.getUser(
-    tokens.value.access_token,
-  );
+  ctx.state.user = user;
 
-  console.log({ data });
-  if (error) {
-    console.log(error.message);
-    ctx.state.token = null;
-  } else {
-    ctx.state.token = tokens.value.access_token;
+  // Continue down the middleware chain
+  const nextResp = await ctx.next();
+
+  // Copy over any headers that were added by Supabase
+  // Note how we're spreading the headers before iterating. This ensures we're
+  // capturing potentially duplicated headers that Supabase might add, like
+  // chunked cookies.
+  for (const [key, value] of [...resp.headers]) {
+    nextResp.headers.append(key, value);
   }
 
-  return await ctx.next();
+  return nextResp;
 }

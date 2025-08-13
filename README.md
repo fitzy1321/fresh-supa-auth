@@ -19,7 +19,7 @@ After creating a new project, goto Settings, then API Settings
 
 Copy `project url` into `SUPABASE_URL` in your `.env` file
 
-Copy `anon public key` into `SUPABASE_KEY`
+Copy `anon public key` into `SUPABASE_ANON_KEY`
 
 Start the project:
 
