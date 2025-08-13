@@ -12,6 +12,10 @@ export async function handler(
   const { data: { session }, error: err1 } = await client.auth.getSession();
   if (err1) {
     // TODO: handle error here
+    console.log(err1);
+    ctx.state.session = null;
+    ctx.state.user = null;
+    return await ctx.next();
   }
   ctx.state.session = session;
 
@@ -19,8 +23,10 @@ export async function handler(
   const { data: { user }, error: err2 } = await client.auth.getUser();
   if (err2) {
     // JWT validation has failed
+    console.log(err2);
     ctx.state.session = null;
     ctx.state.user = null;
+    return await ctx.next();
   }
 
   ctx.state.user = user;

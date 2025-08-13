@@ -1,13 +1,13 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
-import Layout from "/components/Layout.tsx";
-import { State } from "/utils/state.ts";
+import Layout from "../components/Layout.tsx";
+import { State } from "../utils/state.ts";
 
 export const handler: Handlers<unknown, State> = {
   async GET(_req, ctx) {
     // TODO: can I simplify this for all "protected" routes?
     if (!ctx.state.session) {
       return new Response(null, {
-        status: 300,
+        status: 307,
         headers: new Headers({ "location": "/auth/login" }),
       });
     }
@@ -17,7 +17,7 @@ export const handler: Handlers<unknown, State> = {
 
 export default function Home(props: PageProps) {
   return (
-    <Layout isLoggedIn={props.data.session}>
+    <Layout isLoggedIn={Boolean(props.data.session)}>
       <div class="mt-10 px-5 mx-auto flex max-w-screen-md flex-col justify-center">
         {props.data.session
           ? (

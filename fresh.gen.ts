@@ -7,14 +7,12 @@ import * as $_app from "./routes/_app.tsx";
 import * as $_index_new from "./routes/_index.new.tsx";
 import * as $_middleware from "./routes/_middleware.ts";
 import * as $api_joke from "./routes/api/joke.ts";
-import * as $auth_middleware from "./routes/auth/_middleware.ts";
-import * as $auth_secret from "./routes/auth/secret.tsx";
-import * as $email_confirm from "./routes/auth/email_confirm.tsx";
+import * as $auth_email_confirm from "./routes/auth/email_confirm.tsx";
+import * as $auth_login from "./routes/auth/login.tsx";
+import * as $auth_logout from "./routes/auth/logout.ts";
+import * as $auth_signup from "./routes/auth/signup.tsx";
 import * as $greet_name_ from "./routes/greet/[name].tsx";
-import * as $in./routes/auth/login.tsx/index.tsx";
-import * as $login from "./routes/login.tsx";
-import * as $logout from "./routes/auth/logout.ts";
-import * as $signup from "./routes/auth/signup.tsx";
+import * as $index from "./routes/index.tsx";
 import * as $Counter from "./islands/Counter.tsx";
 import type { Manifest } from "$fresh/server.ts";
 
@@ -25,14 +23,12 @@ const manifest = {
     "./routes/_index.new.tsx": $_index_new,
     "./routes/_middleware.ts": $_middleware,
     "./routes/api/joke.ts": $api_joke,
-    "./routes/auth/_middleware.ts": $auth_middleware,
-    "./routes/auth/secret.tsx": $auth_secret,
-    "./routes/email_confirm.tsx": $email_confirm,
+    "./routes/auth/email_confirm.tsx": $auth_email_confirm,
+    "./routes/auth/login.tsx": $auth_login,
+    "./routes/auth/logout.ts": $auth_logout,
+    "./routes/auth/signup.tsx": $auth_signup,
     "./routes/greet/[name].tsx": $greet_name_,
     "./routes/index.tsx": $index,
-    "./routes/login.tsx": $login,
-    "./routes/logout.ts": $logout,
-    "./routes/signup.tsx": $signup,
   },
   islands: {
     "./islands/Counter.tsx": $Counter,

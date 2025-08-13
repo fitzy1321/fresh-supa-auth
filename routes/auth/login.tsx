@@ -1,7 +1,7 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { assert } from "$std/assert/assert.ts";
-import { State } from "/utils/state.ts";
-import { createClient } from "/utils/supabase/server.ts";
+import { State } from "../../utils/state.ts";
+import { createClient } from "../../utils/supabase/server.ts";
 
 export const handler: Handlers<unknown, State> = {
   async POST(req, ctx) {
@@ -94,7 +94,7 @@ export default function Login(props: PageProps) {
               <p class="text-sm font-light text-gray-500 dark:text-gray-400">
                 Don't have an account yet?{" "}
                 <a
-                  href="/signup"
+                  href="/auth/signup"
                   class="font-medium text-blue-600 hover:underline dark:text-blue-500"
                 >
                   Sign up

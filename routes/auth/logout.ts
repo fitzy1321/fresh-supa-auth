@@ -1,6 +1,6 @@
 import { Handlers } from "$fresh/server.ts";
 import { State } from "../../utils/state.ts";
-import { createClient } from "/utils/supabase/server.ts";
+import { createClient } from "../../utils/supabase/server.ts";
 
 export const handler: Handlers<unknown, State> = {
   async GET(req, ctx) {
