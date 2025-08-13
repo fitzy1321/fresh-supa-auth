@@ -12,7 +12,7 @@ export async function handler(
   const { data: { session }, error: err1 } = await client.auth.getSession();
   if (err1) {
     // TODO: handle error here
-    console.log(err1);
+    // console.log(err1);
     ctx.state.session = null;
     ctx.state.user = null;
     return await ctx.next();
