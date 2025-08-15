@@ -2,33 +2,33 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
+import * as $_middleware from "./routes/!/_middleware.ts";
+import * as $_index from "./routes/!/index.tsx";
 import * as $_404 from "./routes/_404.tsx";
 import * as $_app from "./routes/_app.tsx";
-import * as $_middleware from "./routes/_middleware.ts";
 import * as $api_joke from "./routes/api/joke.ts";
-import * as $auth_email_confirm from "./routes/auth/email_confirm.tsx";
-import * as $auth_login from "./routes/auth/login.tsx";
-import * as $auth_logout from "./routes/auth/logout.ts";
-import * as $auth_signup from "./routes/auth/signup.tsx";
-import * as $fresh_home from "./routes/fresh-home.tsx";
+import * as $email_confirm from "./routes/email_confirm.tsx";
 import * as $greet_name_ from "./routes/greet/[name].tsx";
 import * as $index from "./routes/index.tsx";
+import * as $login from "./routes/login.tsx";
+import * as $logout from "./routes/logout.ts";
+import * as $signup from "./routes/signup.tsx";
 import * as $Counter from "./islands/Counter.tsx";
 import type { Manifest } from "$fresh/server.ts";
 
 const manifest = {
   routes: {
+    "./routes/!/_middleware.ts": $_middleware,
+    "./routes/!/index.tsx": $_index,
     "./routes/_404.tsx": $_404,
     "./routes/_app.tsx": $_app,
-    "./routes/_middleware.ts": $_middleware,
     "./routes/api/joke.ts": $api_joke,
-    "./routes/auth/email_confirm.tsx": $auth_email_confirm,
-    "./routes/auth/login.tsx": $auth_login,
-    "./routes/auth/logout.ts": $auth_logout,
-    "./routes/auth/signup.tsx": $auth_signup,
-    "./routes/fresh-home.tsx": $fresh_home,
+    "./routes/email_confirm.tsx": $email_confirm,
     "./routes/greet/[name].tsx": $greet_name_,
     "./routes/index.tsx": $index,
+    "./routes/login.tsx": $login,
+    "./routes/logout.ts": $logout,
+    "./routes/signup.tsx": $signup,
   },
   islands: {
     "./islands/Counter.tsx": $Counter,

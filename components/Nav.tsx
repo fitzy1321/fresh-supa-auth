@@ -9,7 +9,7 @@ export default function Nav({ loggedIn, compact }: NavProps) {
   ];
 
   const loggedInMenus = [
-    { name: "Secret", href: "/auth/secret" },
+    // { name: "Secret", href: "/secret" },
     { name: "Logout", href: "/logout" },
   ];
 
